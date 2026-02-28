@@ -976,13 +976,13 @@ public class DataSeeder : IDataSeeder
         var roomData = new[] {
             ("A-101", 1, 0, 2, RoomType.Double, 8000m, true, false),
             ("A-102", 1, 0, 2, RoomType.Double, 8000m, true, false),
-            ("A-103", 1, 0, 4, RoomType.Quad, 5000m, false, false),
+            ("A-103", 1, 0, 4, RoomType.Triple, 5000m, false, false),
             ("A-201", 2, 0, 1, RoomType.Single, 12000m, true, true),
             ("A-202", 2, 0, 2, RoomType.Double, 8000m, true, false),
-            ("A-203", 2, 0, 4, RoomType.Quad, 5000m, false, false),
+            ("A-203", 2, 0, 4, RoomType.Triple, 5000m, false, false),
             ("B-101", 1, 0, 1, RoomType.Single, 15000m, true, true),
             ("B-102", 1, 0, 2, RoomType.Double, 10000m, true, true),
-            ("B-103", 1, 0, 4, RoomType.Quad, 6000m, true, false),
+            ("B-103", 1, 0, 4, RoomType.Triple, 6000m, true, false),
             ("B-201", 2, 0, 3, RoomType.Triple, 7000m, true, false),
             ("B-202", 2, 0, 2, RoomType.Double, 9000m, true, true),
             ("B-203", 2, 0, 4, RoomType.Quad, 5500m, false, false),
@@ -1030,7 +1030,7 @@ public class DataSeeder : IDataSeeder
             ("Muhammad Aslam", StaffRole.Warden, 45000m, "Day"),
             ("Rashid Mehmood", StaffRole.Guard, 25000m, "Night"),
             ("Nasreen Bibi", StaffRole.Cook, 30000m, "Day"),
-            ("Tahir Abbas", StaffRole.Electrician, 28000m, "Rotating"),
+            ("Tahir Abbas", StaffRole.Maintenance, 28000m, "Rotating"),
             ("Shabana Kousar", StaffRole.Cleaner, 22000m, "Day")
         };
         foreach (var (name, role, salary, shift) in staffData)
