@@ -285,3 +285,115 @@ public enum VisitorStatus
     CheckedIn = 1,
     CheckedOut = 2
 }
+
+// ─────────── NEW ENTITIES (Phase 5 Improvements) ───────────
+
+// #3 Role-based access
+public enum UserRole
+{
+    Admin = 1,
+    Warden = 2,
+    Accountant = 3,
+    Staff = 4
+}
+
+// #29 Leave Management
+public class LeaveRequest
+{
+    public int Id { get; set; }
+    public int StudentId { get; set; }
+    public string StudentName { get; set; } = string.Empty;
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public string Reason { get; set; } = string.Empty;
+    public LeaveStatus Status { get; set; } = LeaveStatus.Pending;
+    public string ApprovedBy { get; set; } = string.Empty;
+    public DateTime RequestedAt { get; set; }
+    public int TotalDays => (EndDate - StartDate).Days + 1;
+}
+
+public enum LeaveStatus
+{
+    Pending = 1,
+    Approved = 2,
+    Rejected = 3,
+    Cancelled = 4
+}
+
+// #28 Student Check-in/Check-out
+public class StudentCheckInOut
+{
+    public int Id { get; set; }
+    public int StudentId { get; set; }
+    public string StudentName { get; set; } = string.Empty;
+    public CheckInOutType Type { get; set; }
+    public DateTime Timestamp { get; set; }
+    public string Remarks { get; set; } = string.Empty;
+}
+
+public enum CheckInOutType
+{
+    CheckIn = 1,
+    CheckOut = 2
+}
+
+// #30 Inventory Management
+public class InventoryItem
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public InventoryCategory Category { get; set; }
+    public int Quantity { get; set; }
+    public int? RoomId { get; set; }
+    public string? RoomNumber { get; set; }
+    public string Condition { get; set; } = "Good";
+    public DateTime PurchaseDate { get; set; }
+    public decimal UnitCost { get; set; }
+    public bool IsActive { get; set; } = true;
+    public decimal TotalValue => Quantity * UnitCost;
+}
+
+public enum InventoryCategory
+{
+    Furniture = 1,
+    Electronics = 2,
+    Bedding = 3,
+    Plumbing = 4,
+    Kitchen = 5,
+    Cleaning = 6,
+    Keys = 7,
+    Other = 8
+}
+
+// #27 Notification Service
+public class Notification
+{
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+    public NotificationType Type { get; set; }
+    public int? TargetStudentId { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public bool IsRead { get; set; }
+    public bool IsSent { get; set; }
+}
+
+public enum NotificationType
+{
+    PaymentDue = 1,
+    PaymentOverdue = 2,
+    ComplaintUpdate = 3,
+    LeaveApproved = 4,
+    LeaveRejected = 5,
+    Notice = 6,
+    System = 7
+}
+
+// #20 Data Migration
+public class SchemaVersion
+{
+    public int Id { get; set; }
+    public int Version { get; set; } = 1;
+    public DateTime AppliedAt { get; set; }
+    public string Description { get; set; } = string.Empty;
+}
