@@ -22,5 +22,13 @@
     "PerformedBy": "admin",
     "Timestamp": "2026-03-01T03:16:32.3302771+05:00",
     "Details": "Failed attempt 1/3"
+  },
+  {
+    "Id": 4,
+    "Action": "Failed Login",
+    "Module": "Auth",
+    "PerformedBy": "admin",
+    "Timestamp": "2026-03-01T03:17:30.157573+05:00",
+    "Details": "Failed attempt 2/3"
   }
 ]
