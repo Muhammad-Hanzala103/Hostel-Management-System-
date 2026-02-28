@@ -305,6 +305,18 @@ public static class ConsoleUI
         return input == "y" || input == "yes";
     }
 
+    public static DateTime ReadDate(string prompt)
+    {
+        while (true)
+        {
+            var input = ReadInput($"{prompt} (dd-MM-yyyy)");
+            if (DateTime.TryParseExact(input, new[] { "dd-MM-yyyy", "d-M-yyyy", "dd/MM/yyyy", "yyyy-MM-dd" },
+                null, System.Globalization.DateTimeStyles.None, out var date))
+                return date;
+            ShowError("Invalid date format. Use dd-MM-yyyy");
+        }
+    }
+
     public static T ReadEnum<T>(string prompt) where T : struct, Enum
     {
         var values = Enum.GetValues<T>();
