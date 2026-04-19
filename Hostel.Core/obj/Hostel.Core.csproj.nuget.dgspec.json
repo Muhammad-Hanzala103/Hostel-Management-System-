@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj": {}
+    "c:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj": {
+    "c:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj",
+        "projectUniqueName": "c:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj",
         "projectName": "Hostel.Core",
-        "projectPath": "C:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj",
+        "projectPath": "c:\\Projects\\C-Sharp-Project\\Hostel.Core\\Hostel.Core.csproj",
         "packagesPath": "C:\\Users\\hani7\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\C-Sharp-Project\\Hostel.Core\\obj\\",
+        "outputPath": "c:\\Projects\\C-Sharp-Project\\Hostel.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -52,15 +52,15 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

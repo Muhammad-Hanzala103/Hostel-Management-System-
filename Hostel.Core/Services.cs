@@ -901,11 +901,9 @@ public class AdminService : IAdminService
     private static string HashPassword(string password)
     {
         // PBKDF2 with random salt — much stronger than plain SHA256
-        using var rng = RandomNumberGenerator.Create();
-        var salt = new byte[16];
-        rng.GetBytes(salt);
-        using var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100_000, HashAlgorithmName.SHA256);
-        var hash = pbkdf2.GetBytes(32);
+        var salt = RandomNumberGenerator.GetBytes(16);
+        var hash = Rfc2898DeriveBytes.Pbkdf2(password, salt, 100_000, HashAlgorithmName.SHA256, 32);
+        
         // Store salt + hash together as base64
         var combined = new byte[48]; // 16 salt + 32 hash
         Array.Copy(salt, 0, combined, 0, 16);
@@ -920,16 +918,17 @@ public class AdminService : IAdminService
             var combined = Convert.FromBase64String(storedHash);
             if (combined.Length == 48) // PBKDF2 format
             {
-                var salt = new byte[16];
-                Array.Copy(combined, 0, salt, 0, 16);
-                using var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100_000, HashAlgorithmName.SHA256);
-                var hash = pbkdf2.GetBytes(32);
-                return hash.SequenceEqual(combined[16..]);
+                var salt = combined[0..16];
+                var expectedHash = combined[16..];
+                var actualHash = Rfc2898DeriveBytes.Pbkdf2(password, salt, 100_000, HashAlgorithmName.SHA256, 32);
+                return CryptographicOperations.FixedTimeEquals(actualHash, expectedHash);
             }
             else // Backward compat: old SHA256 format
             {
                 var oldHash = SHA256.HashData(Encoding.UTF8.GetBytes(password + "HostelSalt2026"));
-                return Convert.ToBase64String(oldHash) == storedHash;
+                return CryptographicOperations.FixedTimeEquals(
+                    Encoding.UTF8.GetBytes(Convert.ToBase64String(oldHash)),
+                    Encoding.UTF8.GetBytes(storedHash));
             }
         }
         catch { return false; }

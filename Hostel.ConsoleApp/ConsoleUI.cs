@@ -43,7 +43,7 @@ public static class ConsoleUI
         Console.ForegroundColor = Warning;
         Console.WriteLine("               Ultimate Hostel Management System v2.0");
         Console.ForegroundColor = Muted;
-        Console.WriteLine("               Powered by .NET 8 | Console Edition");
+        Console.WriteLine("               Powered by .NET 10 | Console Edition");
         Console.ResetColor();
         Console.WriteLine();
     }
