@@ -1,10 +1,10 @@
 # 🏨 Hostel Management System
-### Console-Based Application · .NET 8 · C# · Version 2.0
+### Console-Based Application · .NET 10 · C# · Version 2.1
 
 <div align="center">
 
-![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet)
-![C#](https://img.shields.io/badge/C%23-12.0-239120?style=for-the-badge&logo=csharp)
+![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-13.0-239120?style=for-the-badge&logo=csharp)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
 ![Tests](https://img.shields.io/badge/Tests-16%20Passing-brightgreen?style=for-the-badge)
@@ -44,16 +44,16 @@ The **Hostel Management System** is a comprehensive, multi-project C# solution d
 Managing a student hostel involves coordinated tracking of dozens of processes — rooms, students, fees, staff, visitors, complaints, and more. This system solves all of these with:
 
 - **No database server needed**: Uses JSON file persistence — just run and go.
-- **Secure by default**: PBKDF2 password hashing, login lockout, session timeout, and audit logging.
-- **Enterprise-grade architecture**: Clean separation of concerns, interfaces, repositories, and services.
+- **Secure by default**: Modern PBKDF2 password hashing (static method), login lockout, session timeout, and audit logging.
+- **Enterprise-grade architecture**: Clean separation of concerns, interfaces, repositories, and **Dependency Injection (Microsoft.Extensions.DependencyInjection)**.
 - **Data that survives restarts**: All changes persist to JSON files automatically.
-- **Containerized**: Ships as a ready-to-run Docker image.
+- **Containerized**: Ships as a modern .NET 10 Docker image.
 
 ---
 
 ## 🏗️ Architecture
 
-The solution follows a **layered architecture** with three projects:
+The solution follows a **layered architecture** with a central DI container:
 
 ```
 HostelManagement.sln
@@ -66,7 +66,7 @@ HostelManagement.sln
 │   └── DTOs.cs           ← Data Transfer Objects
 │
 ├── Hostel.ConsoleApp/    ← Presentation Layer (console executable)
-│   ├── Program.cs        ← App bootstrap / DI wiring
+│   ├── Program.cs        ← DI Container Registration & App Entry
 │   ├── HostelApp.cs      ← Main menu + top-level menus
 │   ├── HostelApp.Students.cs  ← Student management screens
 │   ├── HostelApp.Payments.cs  ← Fee & payment screens
@@ -76,13 +76,13 @@ HostelManagement.sln
 │   └── ConsoleUI.cs           ← Reusable UI components
 │
 └── Hostel.Tests/         ← Unit Tests (xUnit)
-    └── UnitTest1.cs      ← 16 unit tests (all passing)
+    └── UnitTest1.cs      ← 16 unit tests (all passing on .NET 10)
 ```
 
 ### Dependency Flow
 
 ```
-Hostel.ConsoleApp
+Hostel.ConsoleApp (DI Container)
       │
       ▼  (references)
 Hostel.Core
@@ -91,7 +91,7 @@ Hostel.Core
 JSON File System  (data/)
 ```
 
-`Hostel.Core` is completely independent — it can be reused by any presentation layer (console, web, API, etc.).
+`Hostel.Core` is completely independent and logic is injected via `Microsoft.Extensions.DependencyInjection`.
 
 ---
 

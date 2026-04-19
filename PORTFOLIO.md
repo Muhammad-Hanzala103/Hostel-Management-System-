@@ -9,18 +9,19 @@
 | **Name** | Muhammad Hanzala |
 | **GitHub** | [@Muhammad-Hanzala103](https://github.com/Muhammad-Hanzala103) |
 | **Repository** | [C-Sharp-Project](https://github.com/Muhammad-Hanzala103/C-Sharp-Project) |
-| **Project** | Hostel Management System v2.0 |
-| **Language** | C# 12 / .NET 8 |
+| **Project** | Hostel Management System v2.1 |
+| **Language** | C# 13 / .NET 10 |
 | **Type** | Console-Based Application |
 
 ---
 
 ## 🏨 Project Summary
 
-The **Hostel Management System** is a fully-featured, production-quality console application that manages all operational aspects of a student hostel. The system was developed in two phases:
+The **Hostel Management System** is a fully-featured, production-quality console application that manages all operational aspects of a student hostel. The system was developed in three phases:
 
 - **v1.0** — Basic CRUD for students, rooms, payments, and complaints
 - **v2.0** — Major overhaul with 50 professional-grade improvements including security hardening, analytics, scheduling, inventory, Docker containerization, and CI/CD
+- **v2.1** — Architecture modernization: Upgraded to **.NET 10**, implemented **Dependency Injection (DI)**, and hardened security with modern **PBKDF2 static methods** and **FixedTimeEquals** comparison.
 
 ---
 
