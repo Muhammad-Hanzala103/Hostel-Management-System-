@@ -72,7 +72,7 @@ HostelManagement.sln
 ## 💡 Key Technical Decisions
 
 ### 1. JSON File Storage (No Database Server)
-**Why**: Zero external dependencies. The application runs anywhere .NET 8 runs — no SQL Server, no PostgreSQL, no connection strings. Perfect for evaluation and demonstration.
+**Why**: Zero external dependencies. The application runs anywhere .NET 10 runs — no SQL Server, no PostgreSQL, no connection strings. Perfect for evaluation and demonstration.
 
 **How**: `JsonFileRepository<T>` — a generic repository that reads/writes any entity to its own JSON file. Uses reflection to handle the `Id` property generically.
 
@@ -85,15 +85,14 @@ public class JsonFileRepository<T> : IGenericRepository<T> where T : class
 }
 ```
 
-### 2. Generic Repository Pattern
-One `IGenericRepository<T>` interface works for ALL 17 entity types. This eliminates duplicate boilerplate code and enforces consistent data access patterns.
+### 2. Microsoft Dependency Injection (DI)
+The application uses the enterprise-standard `Microsoft.Extensions.DependencyInjection` container. This allows for loose coupling between services and repositories, making the code more testable and maintainable.
 
-### 3. PBKDF2 Password Security
-Passwords are **never stored in plain text**. Each password is hashed with:
-- PBKDF2-HMAC-SHA256
+### 3. Modern PBKDF2 Password Security
+Passwords are **never stored in plain text**. v2.1 uses the modern `Rfc2898DeriveBytes.Pbkdf2` static method for performance and security, along with `CryptographicOperations.FixedTimeEquals` to prevent timing attacks.
 - 100,000 iterations (NIST recommendation)
-- 32-byte cryptographically random salt
-- 32-byte derived key
+- 16-byte cryptographically random salt
+- 32-byte derived key (SHA256)
 
 ### 4. Partial Class Pattern
 The `HostelApp` class spans 7 files (HostelApp.cs, HostelApp.Students.cs, etc.) using C# partial classes. This keeps each file focused (~500 lines each) while the compiler treats them as one class.
@@ -164,26 +163,39 @@ Records daily entry/exit of students with timestamps and remarks. Useful for hos
 
 ```dockerfile
 # Stage 1 — Build (uses SDK image)
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
+
+# Copy solution and project files first for better layer caching
+COPY HostelManagement.sln ./
 COPY Hostel.Core/Hostel.Core.csproj Hostel.Core/
 COPY Hostel.ConsoleApp/Hostel.ConsoleApp.csproj Hostel.ConsoleApp/
 COPY Hostel.Tests/Hostel.Tests.csproj Hostel.Tests/
-RUN dotnet restore Hostel.ConsoleApp/Hostel.ConsoleApp.csproj
+
+# Restore dependencies
+RUN dotnet restore
+
+# Copy the remaining source code
 COPY . .
-RUN dotnet publish Hostel.ConsoleApp/Hostel.ConsoleApp.csproj -c Release -o /app
+
+# Build and publish the application
+RUN dotnet publish Hostel.ConsoleApp/Hostel.ConsoleApp.csproj -c Release -o /app --no-restore
 
 # Stage 2 — Runtime (uses much smaller runtime image)
-FROM mcr.microsoft.com/dotnet/runtime:8.0
+FROM mcr.microsoft.com/dotnet/runtime:10.0
 WORKDIR /app
 COPY --from=build /app .
+
+# Create data directory and set permissions (if needed)
+RUN mkdir -p data backups exports logs
+
 ENTRYPOINT ["dotnet", "Hostel.ConsoleApp.dll"]
 ```
 
 ### Why Multi-Stage?
 | | Build Image | Runtime Image |
 |---|---|---|
-| **Base** | `dotnet/sdk:8.0` | `dotnet/runtime:8.0` |
+| **Base** | `dotnet/sdk:10.0` | `dotnet/runtime:10.0` |
 | **Contains** | Full SDK, compiler, tools | Runtime only |
 | **Size** | ~800 MB | ~220 MB |
 | **Shipped** | ❌ No | ✅ Yes |
@@ -232,6 +244,7 @@ dotnet test --logger "console;verbosity=detailed"
 ## 🎓 What I Learned
 
 ### C# Concepts Applied
+- **Dependency Injection (DI)** — Using `ServiceCollection` and `ServiceProvider` for enterprise-grade architecture.
 - **Generics** — `IGenericRepository<T>`, `JsonFileRepository<T>`
 - **Interfaces** — 14 distinct service interfaces for loose coupling
 - **Async/Await** — All I/O operations are non-blocking
@@ -243,11 +256,11 @@ dotnet test --logger "console;verbosity=detailed"
 - **Reflection** — Used in `JsonFileRepository<T>` for generic ID handling
 
 ### Software Engineering Principles
-- **SOLID Principles** — Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion
+- **SOLID Principles** — Especially **Dependency Inversion** via DI container.
 - **DRY** — One generic repository replaces 17 separate ones
 - **Separation of Concerns** — Core logic (Core) completely separate from UI (ConsoleApp)
-- **Layered Architecture** — Presentation → Business Logic → Data
-- **Security by Design** — PBKDF2, lockout, timeout built in from the start
+- **Layered Architecture** — Presentation (Console) → Business Logic (Core) → Data (JSON)
+- **Security by Design** — PBKDF2, lockout, timeout, and fixed-time comparison built in.
 
 ---
 

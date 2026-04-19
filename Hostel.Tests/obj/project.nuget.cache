@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gBMPxF+/+YE=",
+  "dgSpecHash": "oFFupynvvJY=",
   "success": true,
-  "projectFilePath": "c:\\Projects\\C-Sharp-Project\\Hostel.Tests\\Hostel.Tests.csproj",
+  "projectFilePath": "C:\\Projects\\C-Sharp-Project\\Hostel.Tests\\Hostel.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hani7\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\hani7\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
