@@ -1,0 +1,102 @@
+[
+  {
+    "Id": 1,
+    "StudentId": 1,
+    "StudentName": "Ahmed Khan",
+    "RoomId": 1,
+    "RoomNumber": "A-101",
+    "StartDate": "2026-04-19T18:15:55.5702701+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 2,
+    "StudentId": 2,
+    "StudentName": "Sara Ali",
+    "RoomId": 2,
+    "RoomNumber": "A-102",
+    "StartDate": "2026-04-19T18:15:55.586066+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 3,
+    "StudentId": 3,
+    "StudentName": "Hassan Raza",
+    "RoomId": 3,
+    "RoomNumber": "A-103",
+    "StartDate": "2026-04-19T18:15:55.6048958+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 4,
+    "StudentId": 4,
+    "StudentName": "Fatima Noor",
+    "RoomId": 4,
+    "RoomNumber": "A-201",
+    "StartDate": "2026-04-19T18:15:55.6155844+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 5,
+    "StudentId": 5,
+    "StudentName": "Bilal Ahmad",
+    "RoomId": 5,
+    "RoomNumber": "A-202",
+    "StartDate": "2026-04-19T18:15:55.6263099+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 6,
+    "StudentId": 6,
+    "StudentName": "Ayesha Malik",
+    "RoomId": 6,
+    "RoomNumber": "A-203",
+    "StartDate": "2026-04-19T18:15:55.642179+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 7,
+    "StudentId": 7,
+    "StudentName": "Usman Tariq",
+    "RoomId": 7,
+    "RoomNumber": "B-101",
+    "StartDate": "2026-04-19T18:15:55.653276+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 8,
+    "StudentId": 8,
+    "StudentName": "Zainab Shah",
+    "RoomId": 8,
+    "RoomNumber": "B-102",
+    "StartDate": "2026-04-19T18:15:55.6704174+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 9,
+    "StudentId": 9,
+    "StudentName": "Ali Hussain",
+    "RoomId": 9,
+    "RoomNumber": "B-103",
+    "StartDate": "2026-04-19T18:15:55.7274359+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  },
+  {
+    "Id": 10,
+    "StudentId": 10,
+    "StudentName": "Maryam Iqbal",
+    "RoomId": 10,
+    "RoomNumber": "B-201",
+    "StartDate": "2026-04-19T18:15:55.7409384+05:00",
+    "EndDate": null,
+    "IsCurrent": true
+  }
+]

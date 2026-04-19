@@ -1,0 +1,149 @@
+[
+  {
+    "Id": 1,
+    "Day": 1,
+    "MealType": 1,
+    "Items": "Paratha, Omelette, Tea",
+    "IsActive": true
+  },
+  {
+    "Id": 2,
+    "Day": 1,
+    "MealType": 2,
+    "Items": "Chicken Karahi, Rice, Raita",
+    "IsActive": true
+  },
+  {
+    "Id": 3,
+    "Day": 1,
+    "MealType": 3,
+    "Items": "Daal Makhni, Naan, Salad",
+    "IsActive": true
+  },
+  {
+    "Id": 4,
+    "Day": 2,
+    "MealType": 1,
+    "Items": "Halwa Puri, Channay",
+    "IsActive": true
+  },
+  {
+    "Id": 5,
+    "Day": 2,
+    "MealType": 2,
+    "Items": "Biryani, Raita, Salad",
+    "IsActive": true
+  },
+  {
+    "Id": 6,
+    "Day": 2,
+    "MealType": 3,
+    "Items": "Mutton Qorma, Roti, Kheer",
+    "IsActive": true
+  },
+  {
+    "Id": 7,
+    "Day": 3,
+    "MealType": 1,
+    "Items": "Egg Sandwich, Juice",
+    "IsActive": true
+  },
+  {
+    "Id": 8,
+    "Day": 3,
+    "MealType": 2,
+    "Items": "Chana Pulao, Achaar",
+    "IsActive": true
+  },
+  {
+    "Id": 9,
+    "Day": 3,
+    "MealType": 3,
+    "Items": "Palak Paneer, Naan, Lassi",
+    "IsActive": true
+  },
+  {
+    "Id": 10,
+    "Day": 4,
+    "MealType": 1,
+    "Items": "Nihari, Naan, Tea",
+    "IsActive": true
+  },
+  {
+    "Id": 11,
+    "Day": 4,
+    "MealType": 2,
+    "Items": "Chicken Handi, Rice, Salad",
+    "IsActive": true
+  },
+  {
+    "Id": 12,
+    "Day": 4,
+    "MealType": 3,
+    "Items": "Mix Sabzi, Roti, Fruit",
+    "IsActive": true
+  },
+  {
+    "Id": 13,
+    "Day": 5,
+    "MealType": 1,
+    "Items": "Paratha, Chai, Cereal",
+    "IsActive": true
+  },
+  {
+    "Id": 14,
+    "Day": 5,
+    "MealType": 2,
+    "Items": "Beef Pulao, Raita, Salad",
+    "IsActive": true
+  },
+  {
+    "Id": 15,
+    "Day": 5,
+    "MealType": 3,
+    "Items": "Chicken Tikka, Naan, Gulab Jamun",
+    "IsActive": true
+  },
+  {
+    "Id": 16,
+    "Day": 6,
+    "MealType": 1,
+    "Items": "French Toast, Milk",
+    "IsActive": true
+  },
+  {
+    "Id": 17,
+    "Day": 6,
+    "MealType": 2,
+    "Items": "Aloo Gosht, Roti, Chutney",
+    "IsActive": true
+  },
+  {
+    "Id": 18,
+    "Day": 6,
+    "MealType": 3,
+    "Items": "Daal Chawal, Papad, Pickle",
+    "IsActive": true
+  },
+  {
+    "Id": 19,
+    "Day": 0,
+    "MealType": 1,
+    "Items": "Halwa Puri, Cholay",
+    "IsActive": true
+  },
+  {
+    "Id": 20,
+    "Day": 0,
+    "MealType": 2,
+    "Items": "Special Biryani, Cold Drink",
+    "IsActive": true
+  },
+  {
+    "Id": 21,
+    "Day": 0,
+    "MealType": 3,
+    "Items": "BBQ Platter, Naan, Ice Cream",
+    "IsActive": true
+  }
+]
