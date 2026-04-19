@@ -264,6 +264,93 @@ dotnet test --logger "console;verbosity=detailed"
 
 ---
 
+## 🤖 Practical Assignment #1: AI-Based Application in .NET
+
+In addition to the main Hostel Management System, I have developed a separate AI-powered chatbot application that fulfills the Practical Assignment #1 requirements for AI-Based Application Development in .NET.
+
+### AI Chatbot Project Overview
+
+**Location**: `AI-Chatbot/` directory  
+**Technology**: .NET 10 Console Application with OpenAI API integration  
+**Features**:
+- Interactive conversational AI using GPT-3.5-turbo
+- Context-aware responses focused on hostel management
+- REST API integration with proper authentication
+- Asynchronous programming with HttpClient
+- Error handling and user-friendly interface
+
+### Key Implementation Details
+
+#### API Integration
+```csharp
+private static async Task<string> GetChatResponse(List<object> messages)
+{
+    var requestBody = new
+    {
+        model = "gpt-3.5-turbo",
+        messages = messages,
+        max_tokens = 150,
+        temperature = 0.7
+    };
+
+    var json = JsonSerializer.Serialize(requestBody);
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+    var response = await client.PostAsync(OpenAiUrl, content);
+    response.EnsureSuccessStatusCode();
+
+    // Parse JSON response and extract AI message
+    var responseString = await response.Content.ReadAsStringAsync();
+    var responseJson = JsonDocument.Parse(responseString);
+
+    return responseJson.RootElement
+        .GetProperty("choices")[0]
+        .GetProperty("message")
+        .GetProperty("content")
+        .GetString() ?? "Sorry, I couldn't generate a response.";
+}
+```
+
+#### Docker Support
+The AI chatbot includes a multi-stage Dockerfile for containerized deployment:
+
+```dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY AIChatbot.csproj ./
+RUN dotnet restore
+COPY . .
+RUN dotnet publish -c Release -o /app
+
+FROM mcr.microsoft.com/dotnet/runtime:10.0
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "AIChatbot.dll"]
+```
+
+### Assignment Deliverables
+
+| Deliverable | Status | Location |
+|---|---|---|
+| Theory Report | ✅ | `AI-Chatbot/Theory_Report.md` |
+| Practical Report | ✅ | `AI-Chatbot/Practical_Report.md` |
+| Source Code | ✅ | `AI-Chatbot/AIChatbot/` |
+| Dockerfile | ✅ | `AI-Chatbot/Dockerfile` |
+| README | ✅ | `AI-Chatbot/README.md` |
+
+### AI Concepts Demonstrated
+
+| Concept | Implementation |
+|---|---|
+| AI API Integration | OpenAI GPT-3.5-turbo via REST API |
+| Asynchronous Programming | `async/await` for non-blocking API calls |
+| JSON Processing | `System.Text.Json` for request/response handling |
+| Error Handling | Try/catch with user-friendly error messages |
+| HTTP Client Usage | `HttpClient` with proper headers and authentication |
+| Containerization | Docker multi-stage build for deployment |
+
+---
+
 ## 📋 Practical Assignment #1 Reference
 
 This project directly demonstrates the following practical concepts:
