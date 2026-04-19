@@ -3,3 +3,7 @@
 [18:16:11] [WARN] [Auth] Failed login for 'd c:\Projects\assignment\AIChatbot ; dotnet run' (attempt 1)
 [18:16:50] [INFO] [App] Application starting...
 [18:16:51] [INFO] [App] All services initialized successfully via DI container
+[18:27:59] [INFO] [App] Application starting...
+[18:27:59] [INFO] [App] All services initialized successfully via DI container
+[18:28:25] [WARN] [Auth] Failed login for 'admin' (attempt 1)
+[18:29:54] [INFO] [Auth] User 'System Administrator' logged in
