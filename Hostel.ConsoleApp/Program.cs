@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Hostel.Core.Entities;
 using Hostel.Core.Interfaces;
 using Hostel.Core.Services;
@@ -10,70 +11,79 @@ var config = AppConfig.Load();
 FileLogger.Info("App", "Application starting...");
 
 var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.DataDirectory);
+var backupDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.BackupDirectory);
+var exportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.ExportDirectory);
 
 // ═══════════════════════════════════════════════════════════════
-//  BOOTSTRAP — JSON-file-based repositories & services
+//  DEPENDENCY INJECTION — Service Collection
 // ═══════════════════════════════════════════════════════════════
-var studentRepo = new JsonFileRepository<Student>(dataDir, "students.json");
-var roomRepo = new JsonFileRepository<Room>(dataDir, "rooms.json");
-var bookingRepo = new JsonFileRepository<Booking>(dataDir, "bookings.json");
-var paymentRepo = new JsonFileRepository<Payment>(dataDir, "payments.json");
-var feeRepo = new JsonFileRepository<FeeStructure>(dataDir, "fees.json");
-var complaintRepo = new JsonFileRepository<Complaint>(dataDir, "complaints.json");
-var staffRepo = new JsonFileRepository<Staff>(dataDir, "staff.json");
-var visitorRepo = new JsonFileRepository<Visitor>(dataDir, "visitors.json");
-var attendanceRepo = new JsonFileRepository<Attendance>(dataDir, "attendance.json");
-var messRepo = new JsonFileRepository<MessMenu>(dataDir, "mess_menu.json");
-var noticeRepo = new JsonFileRepository<Notice>(dataDir, "notices.json");
-var auditRepo = new JsonFileRepository<AuditLog>(dataDir, "audit.json");
-var adminRepo = new JsonFileRepository<Admin>(dataDir, "admins.json");
-var leaveRepo = new JsonFileRepository<LeaveRequest>(dataDir, "leaves.json");
-var checkInOutRepo = new JsonFileRepository<StudentCheckInOut>(dataDir, "checkinout.json");
-var inventoryRepo = new JsonFileRepository<InventoryItem>(dataDir, "inventory.json");
-var notifRepo = new JsonFileRepository<Notification>(dataDir, "notifications.json");
-var schemaRepo = new JsonFileRepository<SchemaVersion>(dataDir, "schema.json");
+var services = new ServiceCollection();
 
-// Core services
-var studentService = new StudentService(studentRepo, roomRepo, bookingRepo);
-var roomService = new RoomService(roomRepo);
-var paymentService = new PaymentService(paymentRepo);
-var feeService = new FeeStructureService(feeRepo);
-var complaintService = new ComplaintService(complaintRepo);
-var staffService = new StaffService(staffRepo);
-var visitorService = new VisitorService(visitorRepo);
-var attendanceService = new AttendanceService(attendanceRepo);
-var messService = new MessMenuService(messRepo);
-var noticeService = new NoticeService(noticeRepo);
-var auditService = new AuditService(auditRepo);
-var adminService = new AdminService(adminRepo);
+// Register Config & Core Infrastructure
+services.AddSingleton(config);
+services.AddSingleton<LoginLockoutManager>(new LoginLockoutManager(config.MaxLoginAttempts, config.LoginLockoutMinutes));
+services.AddSingleton<BackupService>(new BackupService(dataDir, backupDir));
+services.AddSingleton<FormattedReportExporter>(new FormattedReportExporter(exportDir));
 
-// New services (#27-#30, #39, #41)
-var leaveService = new LeaveService(leaveRepo);
-var checkInOutService = new StudentCheckInOutService(checkInOutRepo);
-var inventoryService = new InventoryService(inventoryRepo);
-var notifService = new NotificationService(notifRepo);
-var trendAnalyzer = new TrendAnalyzer(paymentService, studentService);
-var forecaster = new OccupancyForecaster(roomService, studentService);
-var roomAllocator = new RoomAllocationEngine(roomService);
-var backupService = new BackupService(dataDir,
-    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.BackupDirectory));
-var reportExporter = new FormattedReportExporter(
-    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.ExportDirectory));
+// Register Repositories (Singleton as they manage in-memory state)
+services.AddSingleton<IGenericRepository<Student>>(new JsonFileRepository<Student>(dataDir, "students.json"));
+services.AddSingleton<IGenericRepository<Room>>(new JsonFileRepository<Room>(dataDir, "rooms.json"));
+services.AddSingleton<IGenericRepository<Booking>>(new JsonFileRepository<Booking>(dataDir, "bookings.json"));
+services.AddSingleton<IGenericRepository<Payment>>(new JsonFileRepository<Payment>(dataDir, "payments.json"));
+services.AddSingleton<IGenericRepository<FeeStructure>>(new JsonFileRepository<FeeStructure>(dataDir, "fees.json"));
+services.AddSingleton<IGenericRepository<Complaint>>(new JsonFileRepository<Complaint>(dataDir, "complaints.json"));
+services.AddSingleton<IGenericRepository<Staff>>(new JsonFileRepository<Staff>(dataDir, "staff.json"));
+services.AddSingleton<IGenericRepository<Visitor>>(new JsonFileRepository<Visitor>(dataDir, "visitors.json"));
+services.AddSingleton<IGenericRepository<Attendance>>(new JsonFileRepository<Attendance>(dataDir, "attendance.json"));
+services.AddSingleton<IGenericRepository<MessMenu>>(new JsonFileRepository<MessMenu>(dataDir, "mess_menu.json"));
+services.AddSingleton<IGenericRepository<Notice>>(new JsonFileRepository<Notice>(dataDir, "notices.json"));
+services.AddSingleton<IGenericRepository<AuditLog>>(new JsonFileRepository<AuditLog>(dataDir, "audit.json"));
+services.AddSingleton<IGenericRepository<Admin>>(new JsonFileRepository<Admin>(dataDir, "admins.json"));
+services.AddSingleton<IGenericRepository<LeaveRequest>>(new JsonFileRepository<LeaveRequest>(dataDir, "leaves.json"));
+services.AddSingleton<IGenericRepository<StudentCheckInOut>>(new JsonFileRepository<StudentCheckInOut>(dataDir, "checkinout.json"));
+services.AddSingleton<IGenericRepository<InventoryItem>>(new JsonFileRepository<InventoryItem>(dataDir, "inventory.json"));
+services.AddSingleton<IGenericRepository<Notification>>(new JsonFileRepository<Notification>(dataDir, "notifications.json"));
 
-// #6 Login lockout
-var lockout = new LoginLockoutManager(config.MaxLoginAttempts, config.LoginLockoutMinutes);
+// Register Business Services
+services.AddSingleton<IStudentService, StudentService>();
+services.AddSingleton<IRoomService, RoomService>();
+services.AddSingleton<IPaymentService, PaymentService>();
+services.AddSingleton<IFeeStructureService, FeeStructureService>();
+services.AddSingleton<IComplaintService, ComplaintService>();
+services.AddSingleton<IStaffService, StaffService>();
+services.AddSingleton<IVisitorService, VisitorService>();
+services.AddSingleton<IAttendanceService, AttendanceService>();
+services.AddSingleton<IMessMenuService, MessMenuService>();
+services.AddSingleton<INoticeService, NoticeService>();
+services.AddSingleton<IAuditService, AuditService>();
+services.AddSingleton<IAdminService, AdminService>();
 
+// Advanced services
+services.AddSingleton<LeaveService>();
+services.AddSingleton<StudentCheckInOutService>();
+services.AddSingleton<InventoryService>();
+services.AddSingleton<NotificationService>();
+services.AddSingleton<TrendAnalyzer>();
+services.AddSingleton<OccupancyForecaster>();
+services.AddSingleton<RoomAllocationEngine>();
+
+// Register Seeder & Main App
+services.AddSingleton<DataSeeder>();
+services.AddSingleton<HostelApp>();
+
+// Build provider
+var serviceProvider = services.BuildServiceProvider();
+
+// ═══════════════════════════════════════════════════════════════
+//  APP SETUP
+// ═══════════════════════════════════════════════════════════════
 Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-// #34 Apply theme
 ThemeManager.ApplyTheme(config.Theme);
 
 // ═══════════════════════════════════════════════════════════════
 //  DATA SEEDING
 // ═══════════════════════════════════════════════════════════════
-var seeder = new DataSeeder(
-    studentService, roomService, staffService, feeService,
-    messService, noticeService, paymentService, auditService, studentRepo);
+var seeder = serviceProvider.GetRequiredService<DataSeeder>();
 
 if (!await seeder.IsSeededAsync())
 {
@@ -87,17 +97,10 @@ if (!await seeder.IsSeededAsync())
     Console.WriteLine();
 }
 
-FileLogger.Info("App", "All services initialized successfully");
+FileLogger.Info("App", "All services initialized successfully via DI container");
 
 // ═══════════════════════════════════════════════════════════════
 //  LAUNCH APP
 // ═══════════════════════════════════════════════════════════════
-var app = new HostelApp(
-    studentService, roomService, paymentService, feeService,
-    complaintService, staffService, visitorService, attendanceService,
-    messService, noticeService, auditService, adminService,
-    leaveService, checkInOutService, inventoryService, notifService,
-    trendAnalyzer, forecaster, roomAllocator, backupService,
-    reportExporter, lockout, config);
-
+var app = serviceProvider.GetRequiredService<HostelApp>();
 await app.RunAsync();
