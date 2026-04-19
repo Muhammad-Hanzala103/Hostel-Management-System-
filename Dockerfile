@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 # Copy project files
@@ -12,7 +12,7 @@ COPY . .
 RUN dotnet publish Hostel.ConsoleApp/Hostel.ConsoleApp.csproj -c Release -o /app
 
 # Runtime image
-FROM mcr.microsoft.com/dotnet/runtime:8.0
+FROM mcr.microsoft.com/dotnet/runtime:10.0
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "Hostel.ConsoleApp.dll"]
