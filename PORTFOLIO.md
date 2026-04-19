@@ -270,7 +270,7 @@ In addition to the main Hostel Management System, I have developed a separate AI
 
 ### AI Chatbot Project Overview
 
-**Location**: `AI-Chatbot/` directory  
+**Location**: Separate repository/directory `AI-Chatbot-Assignment/`  
 **Technology**: .NET 10 Console Application with OpenAI API integration  
 **Features**:
 - Interactive conversational AI using GPT-3.5-turbo
@@ -332,11 +332,11 @@ ENTRYPOINT ["dotnet", "AIChatbot.dll"]
 
 | Deliverable | Status | Location |
 |---|---|---|
-| Theory Report | ✅ | `AI-Chatbot/Theory_Report.md` |
-| Practical Report | ✅ | `AI-Chatbot/Practical_Report.md` |
-| Source Code | ✅ | `AI-Chatbot/AIChatbot/` |
-| Dockerfile | ✅ | `AI-Chatbot/Dockerfile` |
-| README | ✅ | `AI-Chatbot/README.md` |
+| Theory Report | ✅ | `AI-Chatbot-Assignment/Theory_Report.md` |
+| Practical Report | ✅ | `AI-Chatbot-Assignment/Practical_Report.md` |
+| Source Code | ✅ | `AI-Chatbot-Assignment/AIChatbot/` |
+| Dockerfile | ✅ | `AI-Chatbot-Assignment/Dockerfile` |
+| README | ✅ | `AI-Chatbot-Assignment/README.md` |
 
 ### AI Concepts Demonstrated
 
