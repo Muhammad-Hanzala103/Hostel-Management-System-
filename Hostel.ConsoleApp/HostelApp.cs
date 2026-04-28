@@ -557,10 +557,10 @@ public partial class HostelApp
                 case "7":
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("    ╔═══════════════════════════════════════════╗");
-                    Console.WriteLine("    ║  HOSTEL MANAGEMENT SYSTEM v2.0           ║");
+                    Console.WriteLine("    ║  HOSTEL MANAGEMENT SYSTEM v2.1           ║");
                     Console.WriteLine("    ║  © 2026 Muhammad Hanzala                 ║");
                     Console.WriteLine("    ║  MIT License — Open Source               ║");
-                    Console.WriteLine("    ║  .NET 8 | 50 Features | Console Edition  ║");
+                    Console.WriteLine("    ║  .NET 10 | 50+ Features | Console Edition ║");
                     Console.WriteLine("    ╚═══════════════════════════════════════════╝");
                     Console.ResetColor(); ConsoleUI.Pause(); break;
                 case "8":

@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.1.0] - 2026-04-28
+
+### Added
+- Submission cleanup for console project and separate AI assignment repo
+- Evaluator-focused README updates with exact local, publish, and Docker run paths
+- Web dashboard project aligned with the JSON-backed core services and .NET 10
+- Git ignore rules for build output, IDE state, logs, and seeded runtime data
+- Terminal demo capture artifacts for README evidence
+
+### Changed
+- Standardized project versioning on 2.1.0 across docs, config defaults, and in-app branding
+- Updated CI to .NET 10 and explicit web project validation
+- Corrected Docker guidance to match the actual console publish flow
+- Removed cross-repo AI submission claims from the hostel portfolio
+
+### Fixed
+- Broken Hostel.Web project reference and stale EF Core/unit-of-work wiring
+- Documentation mismatches for .NET version, folder names, and runtime expectations
+
 ## [2.0.0] - 2026-03-01
 
 ### Added

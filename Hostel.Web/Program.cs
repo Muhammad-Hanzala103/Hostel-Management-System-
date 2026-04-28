@@ -1,17 +1,28 @@
-using Hostel.Core.Data;
-using Hostel.Core.EfCore;
 using Hostel.Core.Interfaces;
+using Hostel.Core.Entities;
+using Hostel.Core.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton(AppConfig.Load());
 
-builder.Services.AddDbContext<HostelDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
+var config = AppConfig.Load();
+var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.DataDirectory);
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSingleton<IGenericRepository<Student>>(_ => new JsonFileRepository<Student>(dataDir, "students.json"));
+builder.Services.AddSingleton<IGenericRepository<Room>>(_ => new JsonFileRepository<Room>(dataDir, "rooms.json"));
+builder.Services.AddSingleton<IGenericRepository<Booking>>(_ => new JsonFileRepository<Booking>(dataDir, "bookings.json"));
+builder.Services.AddSingleton<IGenericRepository<Payment>>(_ => new JsonFileRepository<Payment>(dataDir, "payments.json"));
+builder.Services.AddSingleton<IGenericRepository<Complaint>>(_ => new JsonFileRepository<Complaint>(dataDir, "complaints.json"));
+builder.Services.AddSingleton<IGenericRepository<Staff>>(_ => new JsonFileRepository<Staff>(dataDir, "staff.json"));
+
+builder.Services.AddSingleton<IStudentService, StudentService>();
+builder.Services.AddSingleton<IRoomService, RoomService>();
+builder.Services.AddSingleton<IPaymentService, PaymentService>();
+builder.Services.AddSingleton<IComplaintService, ComplaintService>();
+builder.Services.AddSingleton<IStaffService, StaffService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

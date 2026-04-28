@@ -7,9 +7,10 @@ COPY HostelManagement.sln ./
 COPY Hostel.Core/Hostel.Core.csproj Hostel.Core/
 COPY Hostel.ConsoleApp/Hostel.ConsoleApp.csproj Hostel.ConsoleApp/
 COPY Hostel.Tests/Hostel.Tests.csproj Hostel.Tests/
+COPY Hostel.Web/Hostel.Web.csproj Hostel.Web/
 
 # Restore dependencies
-RUN dotnet restore
+RUN dotnet restore Hostel.ConsoleApp/Hostel.ConsoleApp.csproj
 
 # Copy the remaining source code
 COPY . .

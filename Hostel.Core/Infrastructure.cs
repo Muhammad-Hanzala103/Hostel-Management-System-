@@ -24,7 +24,7 @@ public class AppConfig
     public int GracePeriodDays { get; set; } = 7;
     public int SchemaVersion { get; set; } = 2;
     public string HostelName { get; set; } = "Ultimate Hostel";
-    public string Version { get; set; } = "2.0.0";
+    public string Version { get; set; } = "2.1.0";
 
     private static readonly string _configPath = Path.Combine(
         AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
@@ -831,8 +831,8 @@ public static class UpdateChecker
     public static (bool available, string currentVersion, string latestVersion) CheckForUpdates()
     {
         // In production, this would call an API endpoint
-        var current = "2.0.0";
-        var latest = "2.0.0"; // Simulated
+        var current = "2.1.0";
+        var latest = "2.1.0"; // Simulated
         return (current != latest, current, latest);
     }
 }
