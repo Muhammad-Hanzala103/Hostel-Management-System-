@@ -27,7 +27,7 @@ public class AppConfig
     public string Version { get; set; } = "2.1.0";
 
     private static readonly string _configPath = Path.Combine(
-        AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
+        Directory.GetCurrentDirectory(), "appsettings.json");
 
     public static AppConfig Load()
     {
@@ -54,7 +54,7 @@ public class AppConfig
 public static class FileLogger
 {
     private static readonly string _logDir = Path.Combine(
-        AppDomain.CurrentDomain.BaseDirectory, "hostel_logs");
+        Directory.GetCurrentDirectory(), "hostel_logs");
     private static readonly object _lock = new();
 
     public static void Log(string level, string module, string message)

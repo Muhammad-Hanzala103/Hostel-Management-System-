@@ -37,7 +37,6 @@ public partial class HostelApp
     private readonly AppConfig _config;
 
     private string _currentUser = "Admin";
-    private UserRole _currentRole = UserRole.Admin;
     private DateTime _lastActivity = DateTime.Now;
 
     public HostelApp(

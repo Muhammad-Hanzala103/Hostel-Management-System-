@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton(AppConfig.Load());
-
 var config = AppConfig.Load();
-var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.DataDirectory);
+var dataDir = Path.Combine(Directory.GetCurrentDirectory(), config.DataDirectory);
+builder.Services.AddSingleton(config);
 
 builder.Services.AddSingleton<IGenericRepository<Student>>(_ => new JsonFileRepository<Student>(dataDir, "students.json"));
 builder.Services.AddSingleton<IGenericRepository<Room>>(_ => new JsonFileRepository<Room>(dataDir, "rooms.json"));

@@ -41,7 +41,7 @@ public partial class HostelApp
 
     private string GetExportDir()
     {
-        var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "hostel_exports");
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "hostel_exports");
         Directory.CreateDirectory(dir);
         return dir;
     }

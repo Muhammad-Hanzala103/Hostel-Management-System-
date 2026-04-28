@@ -10,9 +10,10 @@ using Hostel.ConsoleApp;
 var config = AppConfig.Load();
 FileLogger.Info("App", "Application starting...");
 
-var dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.DataDirectory);
-var backupDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.BackupDirectory);
-var exportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.ExportDirectory);
+var workingDir = Directory.GetCurrentDirectory();
+var dataDir = Path.Combine(workingDir, config.DataDirectory);
+var backupDir = Path.Combine(workingDir, config.BackupDirectory);
+var exportDir = Path.Combine(workingDir, config.ExportDirectory);
 
 // ═══════════════════════════════════════════════════════════════
 //  DEPENDENCY INJECTION — Service Collection

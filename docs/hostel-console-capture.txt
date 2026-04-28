@@ -1,0 +1,27 @@
+Hostel Management System - Console Demo Capture
+
+Default login:
+  Username: admin
+  Password: admin123
+
+Main menu modules:
+  1. Dashboard & Analytics
+  2. Student Management
+  3. Room Management
+  4. Fee & Payment Management
+  5. Complaint Management
+  6. Staff Management
+  7. Visitor Log
+  8. Attendance Tracking
+  9. Mess Menu Management
+  10. Notice Board
+  11. Reports & Export
+  12. Audit Log
+  13. Leave Management
+  14. Inventory Management
+  15. Student Check-In/Out
+  16. Admin Settings
+
+First-run behavior:
+  - Seeds demo data automatically
+  - Creates hostel_data, hostel_exports, hostel_backups, and hostel_logs

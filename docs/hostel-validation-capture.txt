@@ -1,0 +1,14 @@
+PS C:\Projects\C-Sharp-Project> dotnet build HostelManagement.sln -c Release
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Hostel.Core -> ...\Hostel.Core\bin\Release\net10.0\Hostel.Core.dll
+  Hostel.Tests -> ...\Hostel.Tests\bin\Release\net10.0\Hostel.Tests.dll
+  Hostel.Web -> ...\Hostel.Web\bin\Release\net10.0\Hostel.Web.dll
+  Hostel.ConsoleApp -> ...\Hostel.ConsoleApp\bin\Release\net10.0\Hostel.ConsoleApp.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+PS C:\Projects\C-Sharp-Project> dotnet test Hostel.Tests/Hostel.Tests.csproj -c Release --no-build
+Passed!  - Failed: 0, Passed: 16, Skipped: 0, Total: 16
