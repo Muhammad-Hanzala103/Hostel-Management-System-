@@ -1,0 +1,9 @@
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\rpswa.dswa.cache.json
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.AssemblyInfoInputs.cache
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.AssemblyInfo.cs
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.csproj.CoreCompileInputs.cache
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.RazorAssemblyInfo.cache
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.RazorAssemblyInfo.cs
+C:\Projects\C-Sharp-Project\Hostel.Web\obj\Release\net8.0\Hostel.Web.sourcelink.json

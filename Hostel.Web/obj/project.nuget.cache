@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "wUvX1VeQWfA=",
+  "success": true,
+  "projectFilePath": "C:\\Projects\\C-Sharp-Project\\Hostel.Web\\Hostel.Web.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hani7\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.26\\microsoft.netcore.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\hani7\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.26\\microsoft.windowsdesktop.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\hani7\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.26\\microsoft.aspnetcore.app.ref.8.0.26.nupkg.sha512",
+    "C:\\Users\\hani7\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.26\\microsoft.netcore.app.host.win-x64.8.0.26.nupkg.sha512"
+  ],
+  "logs": []
+}
